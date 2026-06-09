@@ -200,7 +200,6 @@ def main(argv: list[str] | None = None) -> int:
     # Silenciar el ruido de las librerías (peticiones HTTP, mensajes internos del
     # SDK) para que el log muestre solo el avance del procesamiento.
     logging.getLogger("httpx").setLevel(logging.WARNING)
-    logging.getLogger("google_genai").setLevel(logging.WARNING)
 
     ruta = Path(args.csv)
     if not ruta.exists():

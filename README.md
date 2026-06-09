@@ -25,37 +25,19 @@ manual** o **fallida**. El lote nunca se cae por una fila problemática.
 
 ## 2. Arquitectura / diagrama del proceso
 
-```
-            data/solicitudes_ejemplo.csv
-                       │
-                       ▼
-        ┌──────────────────────────────┐
-        │  procesar.py (orquestador)    │
-        │  - lee CSV                    │
-        │  - valida cada fila (Pydantic)│
-        └───────────────┬──────────────┘
-            válida │                 │ inválida / incompleta
-                   ▼                 ▼
-        ┌────────────────┐   estado = "requiere revisión manual"
-        │ llm.py (Claude)│   (se guarda igual)
-        │ 1 llamada JSON │
-        │ estructurada   │
-        └───────┬────────┘
-       éxito │        │ falla tras reintentos
-             ▼        ▼
-   categoría/prioridad   estado = "fallida"
-   resumen/respuesta     (se guarda con nota)
-             │
-             ▼
-        ┌────────────────┐
-        │ db.py (ORM)    │  →  SQLite (local) / PostgreSQL (prod)
-        │ tabla          │     vía DATABASE_URL
-        │ solicitudes_   │
-        │ procesadas     │
-        └────────────────┘
-             │
-             ▼
-   data/salida_ejemplo.csv (volcado de la tabla)
+```mermaid
+flowchart TD
+    A["data/solicitudes_ejemplo.csv"] --> V{"Validación Pydantic<br/>campos mínimos"}
+    V -- "inválida / incompleta" --> RM["Estado: requiere revisión manual<br/>(se guarda igual)"]
+    V -- "válida" --> P["procesar.py · orquestador<br/>enmascara PII y enruta"]
+    P --> L["llm.py · Claude Haiku<br/>1 llamada · tool use, JSON estructurado<br/>clasifica · prioriza · resume · responde"]
+    L -- "falla tras reintentos" --> F["Estado: fallida<br/>(se guarda con nota)"]
+    L -- "categoría = Otro / revisión manual" --> RM
+    L -- "éxito" --> R["Regla de negocio: Riesgo/fraude se eleva a Alta<br/>categoría · prioridad · resumen · respuesta"]
+    R --> DB[("db.py · BD relacional<br/>SQLite local / PostgreSQL prod · DATABASE_URL")]
+    F --> DB
+    RM --> DB
+    DB --> O["data/salida_ejemplo.csv · volcado de la tabla"]
 ```
 
 Diseño **desacoplado**: el módulo de procesamiento (`procesar_solicitud`) recibe
@@ -189,6 +171,53 @@ queda registrado en `justificacion_prioridad` para trazabilidad.
 estructurada por esquema requiere un esquema cerrado (no admite objetos con claves
 arbitrarias); al guardar se convierte a un diccionario JSON.
 
+**Prompt real** (constante `SYSTEM_INSTRUCTION` en `src/llm.py`, verbatim):
+
+```text
+Eres un asistente de operaciones de TUMIPAY, una fintech. Tu tarea es analizar
+solicitudes entrantes de clientes y comercios y registrar un análisis estructurado
+llamando a la herramienta 'registrar_analisis'.
+
+Debes determinar todo lo siguiente:
+
+1. CATEGORÍA (exactamente una):
+   - "Soporte técnico": fallas de la app, terminal/POS, errores de acceso, bugs.
+   - "Solicitud comercial": ventas, afiliación, planes, comisiones, alianzas.
+   - "Riesgo / fraude": cobros no reconocidos, tarjetas clonadas, phishing, suplantación.
+   - "Conciliación / pagos": dinero no reflejado, cuadres, liquidaciones, transferencias pendientes, facturas.
+   - "Actualización de datos": cambio de correo, teléfono, datos personales o del comercio.
+   - "Otro / requiere revisión manual": mensajes ambiguos, vacíos de contexto o que no encajan claramente.
+
+2. PRIORIDAD FINAL ("Alta", "Media" o "Baja"). NO copies la prioridad reportada por
+   el cliente; aplica esta MATRIZ DE PRIORIZACIÓN del negocio. Gana la condición
+   más alta que aplique:
+   - ALTA si se cumple alguna de estas señales:
+       * riesgo de seguridad: fraude, suplantación, acceso no autorizado, phishing;
+       * fondos en riesgo: dinero perdido, retenido, cobrado de más o no reflejado;
+       * bloqueo operativo total: un comercio que no puede vender o un cliente sin
+         acceso a su cuenta.
+   - MEDIA si: afecta el servicio o el uso pero SIN pérdida de dinero ni bloqueo
+     total; o es un trámite/actualización con impacto en la cuenta.
+   - BAJA si: es una consulta informativa, comercial o sin impacto operativo.
+
+3. RESUMEN: una o dos frases claras y neutrales.
+
+4. DATOS EXTRAÍDOS: pares clave/valor presentes en el mensaje (por ejemplo: monto,
+   fecha_evento, id_transaccion, correo_nuevo, telefono, canal_afectado). Solo lo
+   que aparezca explícitamente; no inventes.
+
+5. RESPUESTA SUGERIDA: cordial, profesional, en español, accionable y sin prometer
+   nada que no se pueda cumplir.
+
+6. JUSTIFICACIÓN DE LA PRIORIDAD: por qué asignaste esa prioridad final.
+
+Responde siempre en español.
+```
+
+El **esquema de salida** es el `input_schema` de la herramienta `registrar_analisis`
+(constante `HERRAMIENTA` en `src/llm.py`), que el modelo está obligado a llenar
+mediante *tool use*; así documentación y código no se desincronizan.
+
 ## 8. Almacenamiento
 
 La integración real del flujo es una **base de datos relacional** vía SQLAlchemy.
@@ -198,7 +227,7 @@ Tabla `solicitudes_procesadas`:
 |---------|------|-------|
 | `id` | entero | PK sustituta autoincremental (permite reprocesos). |
 | `id_solicitud` | texto | Identificador de negocio, indexado. |
-| `mensaje` | texto | **Solicitud original** (insumo), para auditar la clasificación. |
+| `mensaje` | texto | Solicitud original (insumo) con la PII de alto riesgo (tarjetas/cuentas) **enmascarada** antes de guardar; sirve para auditar la clasificación. |
 | `canal` | texto | Canal de recepción (insumo). |
 | `tipo_cliente` | texto | Tipo de cliente (insumo). |
 | `nombre_cliente` | texto | Nombre del cliente/comercio (insumo). |
@@ -294,4 +323,3 @@ carpeta `./data` se monta para usar el CSV de entrada y escribir la salida.
   deduplicar por `id_solicitud`.
 - **Respuesta automática:** hoy se sugiere la respuesta; en producción podría
   enviarse por el canal de origen (correo/WhatsApp) con aprobación humana.
-```
