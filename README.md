@@ -27,17 +27,17 @@ manual** o **fallida**. El lote nunca se cae por una fila problemática.
 
 ```mermaid
 flowchart TD
-    A["data/solicitudes_ejemplo.csv"] --> V{"Validación Pydantic<br/>campos mínimos"}
-    V -- "inválida / incompleta" --> RM["Estado: requiere revisión manual<br/>(se guarda igual)"]
-    V -- "válida" --> P["procesar.py · orquestador<br/>enmascara PII y enruta"]
-    P --> L["llm.py · Claude Haiku<br/>1 llamada · tool use, JSON estructurado<br/>clasifica · prioriza · resume · responde"]
-    L -- "falla tras reintentos" --> F["Estado: fallida<br/>(se guarda con nota)"]
-    L -- "categoría = Otro / revisión manual" --> RM
-    L -- "éxito" --> R["Regla de negocio: Riesgo/fraude se eleva a Alta<br/>categoría · prioridad · resumen · respuesta"]
-    R --> DB[("db.py · BD relacional<br/>SQLite local / PostgreSQL prod · DATABASE_URL")]
+    A["data/solicitudes_ejemplo.csv"] --> V{"Validación Pydantic"}
+    V -->|"inválida / incompleta"| RM["Estado: requiere revisión manual"]
+    V -->|"válida"| P["procesar.py orquestador<br/>enmascara PII y enruta"]
+    P --> L["llm.py - Claude Haiku<br/>1 llamada, tool use, JSON estructurado"]
+    L -->|"falla tras reintentos"| F["Estado: fallida"]
+    L -->|"categoría Otro / revisión manual"| RM
+    L -->|"éxito"| R["Regla: Riesgo/fraude se eleva a Alta"]
+    R --> DB["db.py - BD relacional<br/>SQLite / PostgreSQL"]
     F --> DB
     RM --> DB
-    DB --> O["data/salida_ejemplo.csv · volcado de la tabla"]
+    DB --> O["data/salida_ejemplo.csv"]
 ```
 
 Diseño **desacoplado**: el módulo de procesamiento (`procesar_solicitud`) recibe
