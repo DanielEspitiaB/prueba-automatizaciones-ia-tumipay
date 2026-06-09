@@ -1,0 +1,19 @@
+id_solicitud,fecha,canal,tipo_cliente,nombre_cliente,mensaje,prioridad_reportada
+TP-001,2026-06-01,correo,comercio,Rappi Créditos SAS,"Ejecutamos un Pay Out masivo ayer de 240 transacciones por $58.400.000 y no se ha reflejado en las wallets de nuestros usuarios. El dashboard dice 'completado' pero los fondos no llegaron. Necesitamos respuesta hoy.",media
+TP-002,2026-06-01,api,comercio,TiendaOnline SAS,"El endpoint /v1/payin/charge nos devuelve error 500 de forma intermitente desde las 14:30. Estamos perdiendo ventas porque los clientes no pueden completar el pago.",alta
+TP-003,2026-06-02,whatsapp,comercio,Apuestas LuckyBet,"Detectamos un patrón raro: 35 depósitos con tarjetas distintas desde la misma IP en 10 minutos. ¿Pueden revisar si es fraude antes de que lleguen los chargebacks?",baja
+TP-004,2026-06-02,correo,comercio,Mercado Express,"La conciliación del corte del viernes no cuadra: nuestro reporte muestra $12.300.000 en Pay In pero ustedes liquidaron $11.850.000. Faltan $450.000, necesitamos el detalle transacción por transacción.",media
+TP-005,2026-06-03,formulario,comercio,NuevaTienda,"Hola, ya estamos afiliados con Pay In por transferencia. Queremos habilitar también pago con tarjeta Visa/Mastercard. ¿Qué proceso y qué comisión aplica?",baja
+TP-006,2026-06-03,correo,comercio,Distribuidora Norte,"Necesitamos actualizar la cuenta bancaria donde reciben nuestras liquidaciones porque cambiamos de banco. La nueva cuenta es Bancolombia ahorros 123-456789-00 a nombre de Distribuidora Norte SAS.",media
+TP-007,2026-06-04,api,interno,Equipo Integraciones,"Los webhooks de confirmación de Pay In no están llegando a nuestro endpoint desde hace 2 horas. Recibimos los pagos pero no las notificaciones, lo que rompe nuestra conciliación automática.",alta
+TP-008,2026-06-04,whatsapp,comercio,Comercio Andino,"",alta
+TP-009,2026-06-05,formulario,aliado,Fintech Partner CO,"Somos una plataforma de crédito y queremos integrar TumiPay para desembolsos vía Pay Out en Colombia y México. ¿Con quién coordinamos la integración técnica y comercial?",media
+TP-010,2026-06-05,correo,comercio,Gran Bazar,"Hicimos un Pay Out de $3.200.000 a la wallet de un proveedor hace 48 horas, figura 'aprobado' pero el proveedor dice que no lo recibió. Urge resolver.",alta
+TP-011,2026-06-06,whatsapp,comercio,Casa de Apuestas RealBet,"Nos llegaron 18 chargebacks en un día por $9.500.000. Creemos que fueron pagos fraudulentos con tarjetas robadas, una de ellas la 4916 8800 1234 5678. Necesitamos ayuda urgente y revisar nuestro nivel de riesgo.",alta
+TP-012,2026-06-06,formulario,comercio,Punto Pago Sur,"Uno de nuestros puntos Cash en Medellín no aparece habilitado en la red para recibir pagos en efectivo desde ayer. Los clientes llegan y no pueden pagar.",media
+TP-013,2026-06-07,correo,interno,Equipo Cumplimiento,"Necesitamos el reporte trimestral de transacciones marcadas como sospechosas para la revisión de cumplimiento AML. ¿A qué área lo solicitamos?",baja
+TP-014,2026-06-07,formulario,comercio,EmprendeYa,"¿Cuáles son las comisiones de Pay In por transferencia frente a tarjeta? Queremos comparar antes de migrar todo nuestro volumen a TumiPay.",baja
+TP-015,2026-06-08,whatsapp,comercio,TiendaFit,"Buenas, necesito ayuda con algo de mi cuenta.",
+TP-016,2026-06-08,api,comercio,PagosYa,"Ya terminamos las pruebas en sandbox. Solicitamos las credenciales del ambiente de producción del API para salir a producción esta semana.",media
+TP-017,2026-06-09,correo,comercio,MegaStore,"Creemos que alguien accedió a nuestro panel de Gateway sin autorización: vemos Pay Outs que nosotros no creamos por $7.800.000. Bloqueen el acceso de inmediato por favor.",alta
+TP-018,2026-06-09,whatsapp,comercio,Comercio del Río,"Queremos cambiar el correo donde llegan las notificaciones de liquidación. El nuevo es ops@comerciodelrio.com.",baja

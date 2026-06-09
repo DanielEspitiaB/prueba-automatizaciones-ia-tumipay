@@ -1,0 +1,11 @@
+id_solicitud,fecha,canal,tipo_cliente,nombre_cliente,mensaje,prioridad_reportada
+SOL-001,2026-06-01,correo,cliente final,María Gómez,"Buenos días, la app me muestra error 500 cada vez que intento iniciar sesión desde ayer. Ya reinstalé y sigue igual. Necesito entrar para revisar mis movimientos.",alta
+SOL-002,2026-06-01,formulario,comercio,Tienda La Esquina SAS,"Hola, soy dueño de un comercio y quiero habilitar el botón de pagos QR en mi negocio. ¿Qué planes manejan y cómo es la afiliación?",baja
+SOL-003,2026-06-02,WhatsApp,cliente final,Carlos Ruiz,"Vi un cobro de $480.000 a nombre de un comercio en el que nunca compré. Creo que clonaron mi tarjeta 4532 1234 5678 9010, por favor bloquéenla ya.",baja
+SOL-004,2026-06-02,correo,comercio,Distribuidora El Roble,"Hice una venta el viernes por $1.250.000 y el dinero no se ha reflejado en mi cuenta de liquidación. El comprobante dice aprobado. ¿Pueden conciliar?",media
+SOL-005,2026-06-03,formulario,cliente final,Ana Torres,"Quiero actualizar mi número de celular y mi correo registrado porque cambié de operador. El anterior ya no está activo.",
+SOL-006,2026-06-03,WhatsApp,aliado,Inversiones JL,"Hola, ¿con quién puedo hablar?",
+SOL-007,2026-06-04,API,comercio,Comercializadora Andina,"",alta
+SOL-008,2026-06-04,telefono,cliente final,Jorge Medina,"Me llegaron tres mensajes de texto pidiendo mi clave dinámica diciendo que son de TUMIPAY. No la entregué pero quiero reportar el intento de fraude.",media
+SOL-009,2026-06-05,correo,interno,Equipo Operaciones,"Necesitamos el reporte de transacciones rechazadas del mes para la conciliación contable. ¿A quién lo solicito?",baja
+SOL-010,2026-06-05,formulario,cliente final,Laura Peña,"La transferencia que hice ayer aparece como pendiente hace más de 24 horas y ya me descontaron el saldo. Necesito saber dónde está mi plata.",alta

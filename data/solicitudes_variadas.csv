@@ -1,0 +1,31 @@
+id_solicitud,fecha,canal,tipo_cliente,nombre_cliente,mensaje,prioridad_reportada
+VAR-001,2026-06-01,correo,comercio,Panadería El Trigal,"El datáfono dejó de imprimir los recibos desde esta mañana y los clientes me los están pidiendo. Las ventas sí pasan pero no sale el comprobante.",media
+VAR-002,2026-06-01,whatsapp,cliente final,Sofía Ramírez,"Hola, me aparecen dos cobros iguales de $89.900 el mismo día por una sola compra. ¿Me pueden devolver el duplicado?",alta
+VAR-003,2026-06-01,formulario,comercio,Ferretería La Tuerca,"Buenas, quiero saber cómo afiliar mi negocio para recibir pagos con QR y tarjeta. ¿Qué documentos necesito y cuánto cobran de comisión?",baja
+VAR-004,2026-06-02,whatsapp,cliente final,Andrés Beltrán,"Creo que alguien entró a mi cuenta, veo movimientos que no hice y me cambiaron el correo. Ayúdenme por favor, es urgente.",alta
+VAR-005,2026-06-02,api,interno,Sistema Conciliación,"",alta
+VAR-006,2026-06-02,correo,aliado,Cooperativa San José,"Quisiéramos explorar una alianza para ofrecer sus servicios de pago a nuestros asociados. ¿Con quién podemos agendar una reunión?",
+VAR-007,2026-06-03,telefono,cliente final,Luis Cárdenas,"Necesito cambiar el número de celular de mi cuenta, ya no tengo acceso al anterior porque perdí el chip.",media
+VAR-008,2026-06-03,whatsapp,comercio,Restaurante Sabor Criollo,"Las ventas de ayer suman $2.150.000 según mi caja pero en la app de liquidación solo veo $1.980.000. Falta plata, revisen por favor.",alta
+VAR-009,2026-06-03,formulario,cliente final,Daniela Ortiz,"Hola",
+VAR-010,2026-06-04,correo,cliente final,Mauricio Ll.,"Me llegó un correo que dice ser de TUMIPAY pidiéndome confirmar mi contraseña en un link. No hice clic pero quiero confirmar si es real o es estafa.",baja
+VAR-011,2026-06-04,whatsapp,comercio,Tienda Naturista Vida,"La aplicación se cierra sola cuando intento ver el historial de transacciones del mes. Ya actualicé y nada.",media
+VAR-012,2026-06-04,formulario,cliente final,Patricia Gómez,"Quiero actualizar mi cuenta bancaria para los retiros, abrí una cuenta nueva en otro banco.",baja
+VAR-013,2026-06-05,api,comercio,Almacenes El Punto,"Solicito el reporte de comisiones de mayo para la declaración de impuestos. ¿Cómo lo descargo?",baja
+VAR-014,2026-06-05,whatsapp,cliente final,Ricardo Peña,"Hice una transferencia hace 3 días y al destinatario no le ha llegado, pero a mí ya me descontaron. Necesito una solución hoy.",alta
+VAR-015,2026-06-05,correo,comercio,Distribuidora del Valle,"Buenas tardes, estoy interesado en aumentar mi límite de recaudo mensual. ¿Qué proceso debo seguir?",media
+VAR-016,2026-06-06,whatsapp,cliente final,Carolina Méndez,"Vi un cobro de $35.000 de una suscripción que cancelé el mes pasado. Quiero que me reembolsen y dejen de cobrar.",media
+VAR-017,2026-06-06,formulario,interno,Equipo Soporte N1,"Estamos escalando un caso de un comercio que reporta que su terminal muestra error 'comercio no habilitado' tras la actualización.",alta
+VAR-018,2026-06-06,telefono,cliente final,Jaime Rojas,"No me acuerdo de mi clave y el botón de recuperar no me llega al correo. ¿Cómo entro a mi cuenta?",media
+VAR-019,2026-06-07,whatsapp,aliado,Agencia Pagos Express,"Necesitamos las credenciales de integración del ambiente de pruebas para conectar nuestro sistema con su API de pagos.",media
+VAR-020,2026-06-07,correo,comercio,Óptica Visión Clara,"Un cliente dice que pagó pero a mí no me figura la venta. Él tiene el comprobante con número de aprobación. ¿Pueden verificar?",alta
+VAR-021,2026-06-07,formulario,cliente final,Esteban Quintero,"asdf prueba 123",
+VAR-022,2026-06-08,whatsapp,cliente final,Marcela Vélez,"Me robaron el celular y tengo la app instalada con mi cuenta. Por favor bloquéenla para que no hagan transacciones.",alta
+VAR-023,2026-06-08,correo,comercio,Librería El Saber,"Quiero cambiar la razón social y el correo de facturación de mi comercio porque cambiamos de representante legal.",baja
+VAR-024,2026-06-08,api,comercio,SuperMercado Ahorro,"El cierre de caja no me cuadra desde el viernes: hay 5 transacciones aprobadas en mi reporte que no llegaron a la liquidación.",alta
+VAR-025,2026-06-09,whatsapp,cliente final,Felipe Naranjo,"¿Ustedes prestan plata? Necesito un crédito rápido.",
+VAR-026,2026-06-09,formulario,comercio,Gimnasio FitZone,"Quiero ofrecer pago a cuotas a mis clientes. ¿Manejan esa opción y qué costo tiene?",baja
+VAR-027,2026-06-09,correo,cliente final,Natalia Suárez,"Llevo una semana sin poder iniciar sesión, me dice 'usuario bloqueado por seguridad'. No sé por qué ni cómo desbloquearlo.",alta
+VAR-028,2026-06-10,whatsapp,cliente final,Óscar Iguarán,"Recibí una llamada de alguien que decía ser de TUMIPAY y me pidió el código que me llegó por SMS. Le di el código, ¿qué hago ahora?",media
+VAR-029,2026-06-10,formulario,comercio,Café de la Montaña,"Buenas, ¿el dinero de las ventas a cuánto tiempo se desembolsa? Quiero entender los tiempos de pago antes de afiliarme.",baja
+VAR-030,2026-06-10,correo,interno,Auditoría Interna,"Requerimos el detalle de todas las transacciones marcadas como sospechosas en el último trimestre para una revisión de cumplimiento.",media

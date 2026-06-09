@@ -1,0 +1,37 @@
+# --- Secretos y configuración local (NUNCA subir) ---
+.env
+*.env
+!.env.example
+
+# --- Base de datos local (SQLite) ---
+*.db
+*.sqlite
+*.sqlite3
+
+# --- Entornos virtuales ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Logs ---
+*.log
+logs/
+
+# --- IDE / SO ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Material del enunciado (no redistribuir en repo público) ---
+*.pdf

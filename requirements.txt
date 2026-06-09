@@ -1,0 +1,14 @@
+# Validación de datos de entrada y salida
+pydantic>=2.7
+
+# ORM y acceso a base de datos (SQLite local / PostgreSQL prod)
+SQLAlchemy>=2.0
+
+# Carga de variables de entorno desde .env
+python-dotenv>=1.0
+
+# SDK de Anthropic Claude (salida estructurada vía tool use)
+anthropic>=0.40
+
+# Driver de PostgreSQL (solo necesario para el destino de producción)
+psycopg2-binary>=2.9
